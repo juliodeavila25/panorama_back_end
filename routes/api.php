@@ -1,5 +1,9 @@
 <?php
 
+header('Access-Control-Allow-Origin:  *');
+header('Access-Control-Allow-Methods:  POST, GET, OPTIONS, PUT, DELETE');
+header('Access-Control-Allow-Headers:  Content-Type, X-Auth-Token, Origin, Authorization');
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Usos_DireccionesController;
@@ -24,7 +28,7 @@ use App\Http\Controllers\Rie_Predio_Has_ObservacionesController;
 Route::post('login', 'App\Http\Controllers\ApiController@authenticate');
 Route::post('register', 'App\Http\Controllers\ApiController@register');
 
-Route::group(['middleware' => ['jwt.verify']], function() {
+Route::group(['middleware' => ['jwt.verify','cors']], function() {
 Route::get('logout', 'App\Http\Controllers\ApiController@logout');
 Route::get('user', 'App\Http\Controllers\ApiController@getAuthUser');
 //Rie Uso Direcciones
